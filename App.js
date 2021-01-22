@@ -1,11 +1,24 @@
 import { StatusBar } from 'expo-status-bar';
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React, {useState } from 'react'
+import { StyleSheet, View,Image } from 'react-native';
+import PosaVasoImg from './app/components/PosaVasoImg';
+import RefreshButton from './app/components/RefreshButton';
 
 export default function App() {
+
+  const path="./app/assets/posaVasoRojo.jpg"
+  const [posaVasosIndex, setPosaVasosIndex] = useState({ value: 0 })
+
+
+  const reload=()=>{
+    setPosaVasosIndex({value:(posaVasosIndex.value+1)%3});
+  }
+
+
   return (
     <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
+      <PosaVasoImg imgIndex={posaVasosIndex.value}/>
+      <RefreshButton reload={reload}/>
       <StatusBar style="auto" />
     </View>
   );
